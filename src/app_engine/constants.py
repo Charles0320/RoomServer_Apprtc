@@ -20,7 +20,7 @@ LOOPBACK_CLIENT_ID = 'LOOPBACK_CLIENT_ID'
 
 # Turn/Stun server override. This allows AppRTC to connect to turn servers
 # directly rather than retrieving them from an ICE server provider.
-TURN_SERVER_OVERRIDE = []
+#TURN_SERVER_OVERRIDE = []
 # Enable by uncomment below and comment out above, then specify turn and stun
 # servers below.
 # TURN_SERVER_OVERRIDE = [
@@ -29,7 +29,7 @@ TURN_SERVER_OVERRIDE = []
 #       "turn:hostname/IpToTurnServer:19305?transport=udp",
 #       "turn:hostname/IpToTurnServer:19305?transport=tcp"
 #     ],
-#     "username": "TurnServerUsername",
+#     "username": "charles",
 #     "credential": "TurnServerCredentials"
 #   },
 #   {
@@ -38,15 +38,35 @@ TURN_SERVER_OVERRIDE = []
 #     ]
 #   }
 # ]
+TURN_SERVER_OVERRIDE = [
+   {
+     "urls": [
+       "192.168.10.201:19305?transport=udp",
+       "192.168.10.201:19305?transport=tcp"
+     ],
+     "username": "charles",
+     "credential": ""
+   },
+   {
+     "urls": [
+       "stun:192.168.10.201:19302"
+     ]
+   }
+ ]
 
 # TODO(jansson): Remove once AppRTCDemo on iOS supports ICE_SERVER.
-TURN_BASE_URL = 'https://computeengineondemand.appspot.com'
-TURN_URL_TEMPLATE = '%s/turn?username=%s&key=%s'
-CEOD_KEY = '4080218913'
+#TURN_BASE_URL = 'https://computeengineondemand.appspot.com'
+TURN_BASE_URL = 'http://192.168.10.201:8080'
+TURN_URL_TEMPLATE = '%s/turn.php?username=%s&key=%s'
+CEOD_KEY = '1234'
 
-ICE_SERVER_BASE_URL = 'https://networktraversal.googleapis.com'
-ICE_SERVER_URL_TEMPLATE = '%s/v1alpha/iceconfig?key=%s'
-ICE_SERVER_API_KEY = os.environ.get('ICE_SERVER_API_KEY')
+ICE_SERVER_BASE_URL = 'http://192.168.10.201:8080'
+#ICE_SERVER_BASE_URL = 'https://networktraversal.googleapis.com'
+#ICE_SERVER_URL_TEMPLATE = '%s/v1alpha/iceconfig?key=%s'
+ICE_SERVER_URL_TEMPLATE = '%s/v1alpha/iceconfig/%s'
+#ICE_SERVER_API_KEY = os.environ.get('ICE_SERVER_API_KEY')
+ICE_SERVER_API_KEY = '1234567'
+
 
 CALLSTATS_PARAMS = {
   'appId': os.environ.get('CALLSTATS_APP_ID'),
@@ -58,11 +78,11 @@ WSS_INSTANCE_HOST_KEY = 'host_port_pair'
 WSS_INSTANCE_NAME_KEY = 'vm_name'
 WSS_INSTANCE_ZONE_KEY = 'zone'
 WSS_INSTANCES = [{
-    WSS_INSTANCE_HOST_KEY: 'apprtc-ws.webrtc.org:443',
+    WSS_INSTANCE_HOST_KEY: '192.168.10.201:8089',#'apprtc-ws.webrtc.org:443',
     WSS_INSTANCE_NAME_KEY: 'wsserver-std',
     WSS_INSTANCE_ZONE_KEY: 'us-central1-a'
 }, {
-    WSS_INSTANCE_HOST_KEY: 'apprtc-ws-2.webrtc.org:443',
+    WSS_INSTANCE_HOST_KEY: '192.168.10.201:8089',#'apprtc-ws-2.webrtc.org:443',
     WSS_INSTANCE_NAME_KEY: 'wsserver-std-2',
     WSS_INSTANCE_ZONE_KEY: 'us-central1-f'
 }]

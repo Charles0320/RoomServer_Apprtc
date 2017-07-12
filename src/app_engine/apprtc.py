@@ -43,7 +43,8 @@ def get_hd_default(user_agent):
 # iceServers will be filled in by the TURN HTTP request.
 def make_pc_config(ice_transports):
   config = {
-  'iceServers': [],
+#  'iceServers': [],
+  'iceServers':[{"urls":"stun:192.168.10.201"},{"urls":"turn:charles@192.168.10.201","credential":"1234"}],
   'bundlePolicy': 'max-bundle',
   'rtcpMuxPolicy': 'require'
   };
@@ -140,8 +141,10 @@ def get_wss_parameters(request):
     wss_url = 'ws://' + wss_host_port_pair + '/ws'
     wss_post_url = 'http://' + wss_host_port_pair
   else:
-    wss_url = 'wss://' + wss_host_port_pair + '/ws'
-    wss_post_url = 'https://' + wss_host_port_pair
+    wss_url = 'ws://' + wss_host_port_pair + '/ws'
+    wss_post_url = 'http://' + wss_host_port_pair
+   # wss_url = 'wss://' + wss_host_port_pair + '/ws'
+   # wss_post_url = 'https://' + wss_host_port_pair
   return (wss_url, wss_post_url)
 
 def get_version_info():
@@ -590,6 +593,16 @@ class RoomPage(webapp2.RequestHandler):
     # so the client will launch the requested room.
     self.write_response('index_template.html', params)
 
+class IcePage(webapp2.RequestHandler):
+    def write_response(self, result):
+        content = json.dumps({ 'iceServers' : result })
+        self.response.write(content)
+        
+    def post(self,key):
+        logging.info('IcePage key='+key)
+        self.write_response(constants.TURN_SERVER_OVERRIDE)
+
+
 class ParamsPage(webapp2.RequestHandler):
   def get(self):
     # Return room independent room parameters.
@@ -618,4 +631,6 @@ app = webapp2.WSGIApplication([
     ('/message/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)', MessagePage),
     ('/params', ParamsPage),
     ('/r/([a-zA-Z0-9-_]+)', RoomPage),
+    ('/v1alpha/iceconfig/([a-zA-Z0-9-_]+)',IcePage)
+    
 ], debug=True)
