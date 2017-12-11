@@ -6,8 +6,8 @@ This module contains the constants used in AppRTC Python modules.
 """
 import os
 
-BASE_URL='192.168.10.201'
-TURN_BASE_URL='192.168.10.201'
+BASE_URL='192.168.1.100'
+TURN_BASE_URL='192.168.1.100'
 
 # Deprecated domains which we should to redirect to REDIRECT_URL.
 REDIRECT_DOMAINS =  [
@@ -25,9 +25,9 @@ ROOM_REQUEST_ID = 'ROOM_REQUEST_ID'
 
 ROOM_REUSE_MAX = 1000
 
-TURN_TCP_SERVER = "turn:%s:3478?transport=tcp" % (TURN_BASE_URL)
-TURN_UDP_SERVER = "turn:%s:3478?transport=udp" % (TURN_BASE_URL)
-STUN_SERVER = "stun:%s:3478" % (TURN_BASE_URL)
+TURN_TCP_SERVER = "turn:%s:3479?transport=tcp" % (TURN_BASE_URL)
+TURN_UDP_SERVER = "turn:%s:3479?transport=udp" % (TURN_BASE_URL)
+STUN_SERVER = "stun:%s:3479" % (TURN_BASE_URL)
 HTTP_BASE_URL = "http://%s" % (BASE_URL)
 COLIDER_BASE_URL = "%s/colider" % (BASE_URL)
 
