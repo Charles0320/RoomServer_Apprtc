@@ -6,6 +6,9 @@ This module contains the constants used in AppRTC Python modules.
 """
 import os
 
+BASE_URL='192.168.10.201'
+TURN_BASE_URL='192.168.10.201'
+
 # Deprecated domains which we should to redirect to REDIRECT_URL.
 REDIRECT_DOMAINS =  [
   'apprtc.appspot.com', 'apprtc.webrtc.org', 'www.appr.tc'
@@ -18,49 +21,41 @@ MEMCACHE_RETRY_LIMIT = 100
 
 LOOPBACK_CLIENT_ID = 'LOOPBACK_CLIENT_ID'
 
-# Turn/Stun server override. This allows AppRTC to connect to turn servers
-# directly rather than retrieving them from an ICE server provider.
-#TURN_SERVER_OVERRIDE = []
-# Enable by uncomment below and comment out above, then specify turn and stun
-# servers below.
-# TURN_SERVER_OVERRIDE = [
-#   {
-#     "urls": [
-#       "turn:hostname/IpToTurnServer:19305?transport=udp",
-#       "turn:hostname/IpToTurnServer:19305?transport=tcp"
-#     ],
-#     "username": "charles",
-#     "credential": "TurnServerCredentials"
-#   },
-#   {
-#     "urls": [
-#       "stun:hostname/IpToStunServer:19302"
-#     ]
-#   }
-# ]
+ROOM_REQUEST_ID = 'ROOM_REQUEST_ID'
+
+ROOM_REUSE_MAX = 1000
+
+TURN_TCP_SERVER = "turn:%s:3478?transport=tcp" % (TURN_BASE_URL)
+TURN_UDP_SERVER = "turn:%s:3478?transport=udp" % (TURN_BASE_URL)
+STUN_SERVER = "stun:%s:3478" % (TURN_BASE_URL)
+HTTP_BASE_URL = "http://%s" % (BASE_URL)
+COLIDER_BASE_URL = "%s/colider" % (BASE_URL)
+
+
 TURN_SERVER_OVERRIDE = [
    {
      "urls": [
-       "192.168.10.201:19305?transport=udp",
-       "192.168.10.201:19305?transport=tcp"
+       TURN_TCP_SERVER,
+       TURN_UDP_SERVER
      ],
      "username": "charles",
-     "credential": ""
+     "credential": "123456"
    },
    {
      "urls": [
-       "stun:192.168.10.201:19302"
+       STUN_SERVER
      ]
+
    }
  ]
 
 # TODO(jansson): Remove once AppRTCDemo on iOS supports ICE_SERVER.
 #TURN_BASE_URL = 'https://computeengineondemand.appspot.com'
-TURN_BASE_URL = 'http://192.168.10.201:8080'
+TURN_BASE_URL = "%s/avchat" % (HTTP_BASE_URL)
 TURN_URL_TEMPLATE = '%s/turn.php?username=%s&key=%s'
 CEOD_KEY = '1234'
 
-ICE_SERVER_BASE_URL = 'http://192.168.10.201:8080'
+ICE_SERVER_BASE_URL = "%s/avchat" % (HTTP_BASE_URL)
 #ICE_SERVER_BASE_URL = 'https://networktraversal.googleapis.com'
 #ICE_SERVER_URL_TEMPLATE = '%s/v1alpha/iceconfig?key=%s'
 ICE_SERVER_URL_TEMPLATE = '%s/v1alpha/iceconfig/%s'
@@ -78,11 +73,11 @@ WSS_INSTANCE_HOST_KEY = 'host_port_pair'
 WSS_INSTANCE_NAME_KEY = 'vm_name'
 WSS_INSTANCE_ZONE_KEY = 'zone'
 WSS_INSTANCES = [{
-    WSS_INSTANCE_HOST_KEY: '192.168.10.201:8089',#'apprtc-ws.webrtc.org:443',
+    WSS_INSTANCE_HOST_KEY: COLIDER_BASE_URL,#'apprtc-ws.webrtc.org:443',
     WSS_INSTANCE_NAME_KEY: 'wsserver-std',
     WSS_INSTANCE_ZONE_KEY: 'us-central1-a'
 }, {
-    WSS_INSTANCE_HOST_KEY: '192.168.10.201:8089',#'apprtc-ws-2.webrtc.org:443',
+    WSS_INSTANCE_HOST_KEY: COLIDER_BASE_URL,#'apprtc-ws-2.webrtc.org:443',
     WSS_INSTANCE_NAME_KEY: 'wsserver-std-2',
     WSS_INSTANCE_ZONE_KEY: 'us-central1-f'
 }]
