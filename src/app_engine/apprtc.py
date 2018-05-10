@@ -290,6 +290,8 @@ def get_room_parameters(request, room_id, client_id, is_initiator):
     media_constraints = make_media_stream_constraints(audio,video,firefox_fake_device)
     wss_url, wss_post_url = get_wss_parameters(request)
 
+    room_server_url = constants.ROOM_SERVER_URL
+
     bypass_join_confirmation = 'BYPASS_JOIN_CONFIRMATION' in os.environ and \
             os.environ['BYPASS_JOIN_CONFIRMATION'] == 'True'
 
@@ -302,6 +304,7 @@ def get_room_parameters(request, room_id, client_id, is_initiator):
         'offer_options': json.dumps(offer_options),
         'media_constraints': json.dumps(media_constraints),
         'turn_server_override': turn_server_override,
+        'room_server_url':room_server_url,
         'turn_url': turn_url,
         'ice_server_url': ice_server_url,
         'ice_server_transports': ice_server_transports,

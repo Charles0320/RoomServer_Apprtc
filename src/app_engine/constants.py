@@ -31,6 +31,7 @@ STUN_SERVER = "stun:%s:3479" % (TURN_BASE_URL)
 HTTP_BASE_URL = "http://%s" % (BASE_URL)
 COLIDER_BASE_URL = "%s/colider" % (BASE_URL)
 
+ROOM_SERVER_URL="%s/avchat" % (HTTP_BASE_URL)
 
 TURN_SERVER_OVERRIDE = [
    {
