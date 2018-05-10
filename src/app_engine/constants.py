@@ -8,6 +8,7 @@ import os
 
 BASE_URL='192.168.1.100'
 TURN_BASE_URL='192.168.1.100'
+IS_TLS_SUPPORT=False
 
 # Deprecated domains which we should to redirect to REDIRECT_URL.
 REDIRECT_DOMAINS =  [
