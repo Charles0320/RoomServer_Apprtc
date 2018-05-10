@@ -619,6 +619,11 @@ class ParamsPage(webapp2.RequestHandler):
         params = get_room_parameters(self.request, None, None, None)
         self.response.write(json.dumps(params))
 
+class CheckPage(webapp2.RequestHandler):
+    def get(self):
+        content = json.dumps({ 'health' : 'ok' })
+        self.response.write(content)
+
 def checkIfRedirect(self):
     parsed_args = ''
     if self.request.headers['Host'] in constants.REDIRECT_DOMAINS:
@@ -641,6 +646,7 @@ app = webapp2.WSGIApplication([
         ('/avchat/message/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)', MessagePage),
         ('/avchat/params', ParamsPage),
         ('/avchat/r/([a-zA-Z0-9-_]+)', RoomPage),
-        ('/avchat/v1alpha/iceconfig/([a-zA-Z0-9-_]+)',IcePage)
+        ('/avchat/v1alpha/iceconfig/([a-zA-Z0-9-_]+)',IcePage),
+        ('/avchat/checkhealth',CheckPage)
         
 ], debug=True)
