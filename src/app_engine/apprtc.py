@@ -505,6 +505,7 @@ class MessagePage(webapp2.RequestHandler):
                                  ' client ' + client_id)
         wss_url, wss_post_url = get_wss_parameters(self.request)
         url = wss_post_url + '/' + room_id + '/' + client_id
+        logging.info('-----send_message_to_collider :'+ url)
         result = urlfetch.fetch(url=url,
                                                         payload=message,
                                                         method=urlfetch.POST,validate_certificate=None)
