@@ -459,7 +459,7 @@ def remove_client_from_room(host, room_id, client_id):
 def save_message_from_client(host, room_id, client_id, message):
     text = None
     try:
-            text = message.encode(encoding='utf-8', errors='strict')
+        text = message.encode(encoding='utf-8', errors='strict')
     except Exception as e:
         return {'error': constants.RESPONSE_ERROR, 'saved': False}
 
@@ -482,14 +482,14 @@ def save_message_from_client(host, room_id, client_id, message):
         client.add_message(text)
         if memcache_client.cas(key, room, constants.ROOM_MEMCACHE_EXPIRATION_SEC):
             logging.info('Saved message for client %s:%s in room %s, retries=%d' \
-                    %(client_id, str(client), room_id, retries))
+                %(client_id, str(client), room_id, retries))
             return {'error': None, 'saved': True}
         retries = retries + 1
 
 class LeavePage(webapp2.RequestHandler):
     def post(self, room_id, client_id):
-        result = remove_client_from_room(
-                self.request.host_url, room_id, client_id)
+        result = remove_client_from_room( \
+            self.request.host_url, room_id, client_id)
         if result['error'] is None:
             logging.info('Room ' + room_id + ' has state ' + result['room_state'])
             
