@@ -469,6 +469,7 @@ def save_message_from_client(host, room_id, client_id, message):
     # Compare and set retry loop.
     while True:
         room = memcache_client.gets(key)
+        logging.warning('save_message_from_client: ' + room)
         if room is None:
             logging.warning('Unknown room: ' + room_id)
             return {'error': constants.RESPONSE_UNKNOWN_ROOM, 'saved': False}
