@@ -6,9 +6,19 @@ This module contains the constants used in AppRTC Python modules.
 """
 import os
 
+#################Config parmaters#################
+
 BASE_URL='192.168.1.100'
+
 TURN_BASE_URL='192.168.1.100'
+
+TURN_SERVER_PORT=3478
+
 IS_TLS_SUPPORT=False
+
+HTTP_PREX_PROTOCAL='http'
+
+##################################################
 
 # Deprecated domains which we should to redirect to REDIRECT_URL.
 REDIRECT_DOMAINS =  [
@@ -18,19 +28,20 @@ REDIRECT_DOMAINS =  [
 REDIRECT_URL = 'https://appr.tc'
 
 ROOM_MEMCACHE_EXPIRATION_SEC = 60 * 60 * 24
+
 MEMCACHE_RETRY_LIMIT = 100
 
 LOOPBACK_CLIENT_ID = 'LOOPBACK_CLIENT_ID'
 
 ROOM_REQUEST_ID = 'ROOM_REQUEST_ID'
 
-ROOM_REUSE_MAX = 1000
+TURN_TCP_SERVER = "turn:%s:%d?transport=tcp" % (TURN_BASE_URL,TURN_SERVER_PORT)
+TURN_UDP_SERVER = "turn:%s:%d?transport=udp" % (TURN_BASE_URL,TURN_SERVER_PORT)
+STUN_SERVER = "stun:%s:%d" % (TURN_BASE_URL,TURN_SERVER_PORT)
+HTTP_BASE_URL = "%s://%s" % (HTTP_PREX_PROTOCAL,BASE_URL)
 
-TURN_TCP_SERVER = "turn:%s:3479?transport=tcp" % (TURN_BASE_URL)
-TURN_UDP_SERVER = "turn:%s:3479?transport=udp" % (TURN_BASE_URL)
-STUN_SERVER = "stun:%s:3479" % (TURN_BASE_URL)
-HTTP_BASE_URL = "http://%s" % (BASE_URL)
-COLIDER_BASE_URL = "%s/colider" % (BASE_URL)
+
+COLIDER_BASE_URL_WITHOUT_PROTOCAL = "%s/colider" % (BASE_URL)
 
 ROOM_SERVER_URL="%s/avchat" % (HTTP_BASE_URL)
 
@@ -51,17 +62,14 @@ TURN_SERVER_OVERRIDE = [
    }
  ]
 
-# TODO(jansson): Remove once AppRTCDemo on iOS supports ICE_SERVER.
-#TURN_BASE_URL = 'https://computeengineondemand.appspot.com'
-TURN_BASE_URL = "%s/avchat" % (HTTP_BASE_URL)
+
 TURN_URL_TEMPLATE = '%s/turn.php?username=%s&key=%s'
 CEOD_KEY = '1234'
 
 ICE_SERVER_BASE_URL = "%s/avchat" % (HTTP_BASE_URL)
-#ICE_SERVER_BASE_URL = 'https://networktraversal.googleapis.com'
-#ICE_SERVER_URL_TEMPLATE = '%s/v1alpha/iceconfig?key=%s'
+
 ICE_SERVER_URL_TEMPLATE = '%s/v1alpha/iceconfig/%s'
-#ICE_SERVER_API_KEY = os.environ.get('ICE_SERVER_API_KEY')
+
 ICE_SERVER_API_KEY = '1234567'
 
 
@@ -75,11 +83,11 @@ WSS_INSTANCE_HOST_KEY = 'host_port_pair'
 WSS_INSTANCE_NAME_KEY = 'vm_name'
 WSS_INSTANCE_ZONE_KEY = 'zone'
 WSS_INSTANCES = [{
-    WSS_INSTANCE_HOST_KEY: COLIDER_BASE_URL,#'apprtc-ws.webrtc.org:443',
+    WSS_INSTANCE_HOST_KEY: COLIDER_BASE_URL_WITHOUT_PROTOCAL,#'apprtc-ws.webrtc.org:443',
     WSS_INSTANCE_NAME_KEY: 'wsserver-std',
     WSS_INSTANCE_ZONE_KEY: 'us-central1-a'
 }, {
-    WSS_INSTANCE_HOST_KEY: COLIDER_BASE_URL,#'apprtc-ws-2.webrtc.org:443',
+    WSS_INSTANCE_HOST_KEY: COLIDER_BASE_URL_WITHOUT_PROTOCAL,#'apprtc-ws-2.webrtc.org:443',
     WSS_INSTANCE_NAME_KEY: 'wsserver-std-2',
     WSS_INSTANCE_ZONE_KEY: 'us-central1-f'
 }]
