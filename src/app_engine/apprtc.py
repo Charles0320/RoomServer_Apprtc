@@ -505,8 +505,8 @@ class MessagePage(webapp2.RequestHandler):
     def send_message_to_collider(self, room_id, client_id, message):
         logging.info('Forwarding message to collider for room ' + room_id +
                                  ' client ' + client_id)
-        wss_url, wss_post_url = get_wss_parameters(self.request)
-        url = wss_post_url + '/' + room_id + '/' + client_id
+        wss_inner_post_url = constants.COLIDER_INNER_POST_URL_WITH_PROTOCAL
+        url = wss_inner_post_url + '/' + room_id + '/' + client_id
         logging.info('-----send_message_to_collider :'+ url)
         result = urlfetch.fetch(url=url,
                                                         payload=message,
