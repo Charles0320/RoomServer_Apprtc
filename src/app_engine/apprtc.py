@@ -367,7 +367,7 @@ class Room:
         return str(self.clients.keys())
 
 def get_memcache_key_for_room(host, room_id):
-    return '%s/%s' % (host, room_id)
+    return 'RtcRoom/%s' % (room_id)
 
 def add_client_to_room(request, room_id, client_id, is_loopback):
     key = get_memcache_key_for_room(request.host_url, room_id)
