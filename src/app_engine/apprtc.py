@@ -463,6 +463,8 @@ def save_message_from_client(host, room_id, client_id, message):
     except Exception as e:
         return {'error': constants.RESPONSE_ERROR, 'saved': False}
 
+    logging.info('-------------------MessagePage-----------------------')
+    logging.info('--------------host:'+host+',room_id:'+room_id+',message:'+text)
     key = get_memcache_key_for_room(host, room_id)
     memcache_client = memcache.Client()
     retries = 0
