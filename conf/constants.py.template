@@ -9,8 +9,11 @@ import os
 ##################################################
 #################Config parmaters#################
 
-# base url
-BASE_URL='192.168.1.100'
+# apprtc base url
+APPRTC_BASE_URL='192.168.1.100'
+
+#colider base url
+COLLIDER_BASE_URL='192.168.1.100'
 
 # turnserver base url
 TURN_BASE_URL='192.168.1.100'
@@ -48,10 +51,10 @@ ROOM_REQUEST_ID = 'ROOM_REQUEST_ID'
 TURN_TCP_SERVER = "turn:%s:%d?transport=tcp" % (TURN_BASE_URL,TURN_SERVER_PORT)
 TURN_UDP_SERVER = "turn:%s:%d?transport=udp" % (TURN_BASE_URL,TURN_SERVER_PORT)
 STUN_SERVER = "stun:%s:%d" % (TURN_BASE_URL,TURN_SERVER_PORT)
-HTTP_BASE_URL = "%s://%s" % (HTTP_PREX_PROTOCAL,BASE_URL)
+HTTP_BASE_URL = "%s://%s" % (HTTP_PREX_PROTOCAL,APPRTC_BASE_URL)
 
 
-COLIDER_BASE_URL_WITHOUT_PROTOCAL = "%s/colider" % (BASE_URL)
+COLIDER_BASE_URL_WITHOUT_PROTOCAL = "%s/colider" % (COLLIDER_BASE_URL)
 
 COLIDER_INNER_POST_URL_WITH_PROTOCAL = 'http://localhost:%d/colider' % (COLIDER_INNER_PORT)
 
