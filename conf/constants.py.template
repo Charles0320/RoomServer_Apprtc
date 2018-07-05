@@ -16,7 +16,7 @@ APPRTC_BASE_URL='192.168.1.100'
 COLLIDER_BASE_URL='192.168.1.100'
 
 #ice zookeeeper request
-ICE_SERVER_BASE_URL = "192.168.10.250:8081/simpleweb"
+ICE_SERVER_BASE_URL = "http://192.168.10.250:8081/simpleweb"
 
 # turnserver base url
 TURN_BASE_URL='192.168.1.100'
