@@ -84,7 +84,6 @@ TURN_SERVER_OVERRIDE = [
 TURN_URL_TEMPLATE = '%s/turn.php?username=%s&key=%s'
 CEOD_KEY = '1234'
 
-ICE_SERVER_BASE_URL = "%s/avchat" % (HTTP_BASE_URL)
 
 ICE_SERVER_URL_TEMPLATE = '%s/v1alpha/iceconfig/%s'
 

@@ -194,7 +194,8 @@ def get_room_parameters(request, room_id, client_id, is_initiator):
     ice_server_transports = request.get('tt')
     # A HTTP server that will be used to find the right ICE servers to use, as
     # described in http://tools.ietf.org/html/draft-uberti-rtcweb-turn-rest-00.
-    ice_server_base_url = constants.ICE_SERVER_BASE_URL
+    ice_server_base_url = request.get('ts', default_value =
+            constants.ICE_SERVER_BASE_URL)
 
     # Use "audio" and "video" to set the media stream constraints. Defined here:
     # http://goo.gl/V7cZg
