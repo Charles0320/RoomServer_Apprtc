@@ -50,6 +50,16 @@ libraries:
   version: latest
 
 env_variables:
+  APPRTC_BASE_URL: none
+  COLLIDER_BASE_URL: none
+  COLIDER_INNER_PORT: none
+  ICE_SERVER_BASE_URL: none
+  TURN_BASE_URL: none
+  TURN_SERVER_PORT: none
+  IS_TLS_SUPPORT: False
+  HTTP_PREX_PROTOCAL: none
+
+
   BYPASS_JOIN_CONFIRMATION: false
   # Only change these while developing, do not commit to source!
   # Use appcfg.py --env_variable=CALLSTATS_APP_ID:ID  \
