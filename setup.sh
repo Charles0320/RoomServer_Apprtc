@@ -108,7 +108,7 @@ function jwaoo_install_appengine()
 function jwaoo_install_apprtc()
 {
 	echo "Build: ${PROJECT_PATH}"
-	jwaoo_git_clone "http://180.169.167.166:6380/git/RoomServer_Apprtc.git" "${PROJECT_PATH}" || return 1
+	jwaoo_git_clone "http://180.169.167.166:6380/git/RoomServer_Apprtc.git" "${PROJECT_PATH}" "v1.0.0" || return 1
 	
 	pip install request || return 1
 	
@@ -130,7 +130,7 @@ function jwaoo_apprtc_systemd()
 		echo '#!/bin/bash' > $EXEC_FILE
 		echo "source $ETC_PROFILE" >> $EXEC_FILE
 		echo "cd ${PROJECT_PATH}" >> $EXEC_FILE
-		echo "dev_appserver.py --host 0.0.0.0 --port 8080 \ " >> $EXEC_FILE
+		echo 'dev_appserver.py --host 0.0.0.0 --port 8080 \' >> $EXEC_FILE
 		echo '--env_var APPRTC_BASE_URL=192.168.10.201 \' >> $EXEC_FILE
 		echo '--env_var COLLIDER_BASE_URL=192.168.10.201 \' >> $EXEC_FILE
 		echo '--env_var COLIDER_INNER_PORT=8089 \' >> $EXEC_FILE
@@ -138,7 +138,7 @@ function jwaoo_apprtc_systemd()
 		echo '--env_var TURN_BASE_URL=192.168.10.201 \' >> $EXEC_FILE
 		echo '--env_var TURN_SERVER_PORT=3478 \' >> $EXEC_FILE
 		echo '--env_var IS_TLS_SUPPORT=False \' >> $EXEC_FILE
-		echo '--env_var HTTP_PREX_PROTOCAL=http' \ >> $EXEC_FILE
+		echo '--env_var HTTP_PREX_PROTOCAL=http \' >> $EXEC_FILE
 		echo './out/app_engine/'>> $EXEC_FILE
 		chmod +x $EXEC_FILE
 
