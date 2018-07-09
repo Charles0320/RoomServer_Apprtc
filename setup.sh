@@ -110,7 +110,7 @@ function jwaoo_install_apprtc()
 	echo "Build: ${PROJECT_PATH}"
 	jwaoo_git_clone "http://180.169.167.166:6380/git/RoomServer_Apprtc.git" "${PROJECT_PATH}" "v1.0.0" || return 1
 	
-	pip install request || return 1
+	pip install requests || return 1
 	
 	npm -g install grunt-cli || return 1
 	
