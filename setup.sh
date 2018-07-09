@@ -76,7 +76,7 @@ function jwaoo_install_jdk()
 	if [ $? -ne 0 ] ;then
 		echo "Config JAVA in ${ETC_PROFILE} ..."
 		echo "export JAVA_HOME=${JAVA_SDK_HOME}" >> ${ETC_PROFILE}
-		echo 'export JRE_HOME=$JAVA_SDK_HOME/jre' >> ${ETC_PROFILE}
+		echo 'export JRE_HOME=$JAVA_HOME/jre' >> ${ETC_PROFILE}
 		echo 'export PATH=$PATH:$JAVE_HOME/bin:$JRE_HOME/bin' >> ${ETC_PROFILE}
 		echo "Config JAVA in ${ETC_PROFILE} done"
 		source ${ETC_PROFILE} || return 1
@@ -95,9 +95,10 @@ function jwaoo_install_appengine()
 		echo "Config GAE_HOME in ${ETC_PROFILE} ..."
 		echo "export GAE_HOME=${GOOGLE_APP_ENGINE}" >> ${ETC_PROFILE}
 		echo 'export PATH=$PATH:$GAE_HOME' >> ${ETC_PROFILE}
-		echo "Config GAE_HOME in ${ETC_PROFILE} done "
-		source ${ETC_PROFILE} || return 1
+		echo "Config GAE_HOME in ${ETC_PROFILE} done "	
 	fi
+
+	source ${ETC_PROFILE} || return 1
 
 
 }
@@ -127,8 +128,9 @@ function jwaoo_apprtc_systemd()
 	echo '-----jwaoo_apprtc_systemd-----'
 	if [ ! -f $EXEC_FILE ]; then
 		echo '#!/bin/bash' > $EXEC_FILE
+		echo "source $ETC_PROFILE" >> $EXEC_FILE
 		echo "cd ${PROJECT_PATH}" >> $EXEC_FILE
-		echo "${GOOGLE_APP_ENGINE}/dev_appserver.py --host 0.0.0.0 --port 8080 \ " >> $EXEC_FILE
+		echo "dev_appserver.py --host 0.0.0.0 --port 8080 \ " >> $EXEC_FILE
 		echo '--env_var APPRTC_BASE_URL=192.168.10.201 \' >> $EXEC_FILE
 		echo '--env_var COLLIDER_BASE_URL=192.168.10.201 \' >> $EXEC_FILE
 		echo '--env_var COLIDER_INNER_PORT=8089 \' >> $EXEC_FILE
@@ -136,7 +138,8 @@ function jwaoo_apprtc_systemd()
 		echo '--env_var TURN_BASE_URL=192.168.10.201 \' >> $EXEC_FILE
 		echo '--env_var TURN_SERVER_PORT=3478 \' >> $EXEC_FILE
 		echo '--env_var IS_TLS_SUPPORT=False \' >> $EXEC_FILE
-		echo '--env_var HTTP_PREX_PROTOCAL=http \' >> $EXEC_FILE
+		echo '--env_var HTTP_PREX_PROTOCAL=http' \ >> $EXEC_FILE
+		echo './out/app_engine/'>> $EXEC_FILE
 		chmod +x $EXEC_FILE
 
 	fi
